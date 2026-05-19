@@ -1,0 +1,88 @@
+{% extends 'dashboard/base.html' %}
+
+{% block dashboard_content %}
+<div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Wallet</h1>
+    <p class="text-gray-600">Manage your earnings and transactions</p>
+</div>
+
+<!-- Wallet Balance Card -->
+<div class="bg-gradient-to-r from-primary-500 to-primary-700 rounded-xl shadow-lg p-8 text-white mb-8">
+    <div class="flex items-center justify-between">
+        <div>
+            <p class="text-primary-100 text-lg mb-2">Current Balance</p>
+            <p class="text-4xl font-bold">{{ wallet.balance }} PKR</p>
+        </div>
+        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- Earnings Breakdown -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-white rounded-xl shadow-md p-6">
+        <p class="text-gray-500 text-sm mb-2">Total Earnings</p>
+        <p class="text-2xl font-bold text-gray-900">{{ wallet.total_earnings }} PKR</p>
+    </div>
+    <div class="bg-white rounded-xl shadow-md p-6">
+        <p class="text-gray-500 text-sm mb-2">Referral Earnings</p>
+        <p class="text-2xl font-bold text-gray-900">{{ wallet.referral_earnings }} PKR</p>
+    </div>
+    <div class="bg-white rounded-xl shadow-md p-6">
+        <p class="text-gray-500 text-sm mb-2">Team Commissions</p>
+        <p class="text-2xl font-bold text-gray-900">{{ wallet.team_commissions }} PKR</p>
+    </div>
+</div>
+
+<!-- Withdraw Button -->
+<div class="bg-white rounded-xl shadow-md p-6 mb-8">
+    <div class="flex items-center justify-between">
+        <div>
+            <h3 class="text-lg font-bold text-gray-900">Request Withdrawal</h3>
+            <p class="text-gray-600 text-sm">Minimum withdrawal: 100 PKR</p>
+        </div>
+        <a href="/withdrawals/request/" class="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+            Withdraw
+        </a>
+    </div>
+</div>
+
+<!-- Recent Transactions -->
+<div class="bg-white rounded-xl shadow-md p-6">
+    <h2 class="text-xl font-bold text-gray-900 mb-4">Recent Transactions</h2>
+    <div class="space-y-4">
+        {% for transaction in recent_transactions %}
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 {% if transaction.transaction_type == 'credit' %}bg-green-100{% else %}bg-red-100{% endif %} rounded-full flex items-center justify-center">
+                    <svg class="w-5 h-5 {% if transaction.transaction_type == 'credit' %}text-green-600{% else %}text-red-600{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {% if transaction.transaction_type == 'credit' %}
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                        {% else %}
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        {% endif %}
+                    </svg>
+                </div>
+                <div>
+                    <p class="font-medium text-gray-900">{{ transaction.description }}</p>
+                    <p class="text-sm text-gray-500">{{ transaction.created_at|date:"M d, Y H:i" }}</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <span class="font-semibold {% if transaction.transaction_type == 'credit' %}text-green-600{% else %}text-red-600{% endif %}">
+                    {% if transaction.transaction_type == 'credit' %}+{% else %}-{% endif %}{{ transaction.amount }} PKR
+                </span>
+                <p class="text-xs text-gray-500 capitalize">{{ transaction.status }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-gray-500 text-center py-4">No transactions yet</p>
+        {% endfor %}
+    </div>
+    
+    <a href="/wallet/transactions/" class="block text-center mt-4 text-primary-600 hover:underline">View All Transactions</a>
+</div>
+{% endblock %}

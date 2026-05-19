@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Disclaimer - LinkoraX{% endblock %}
+
+{% block content %}
+
+<style>
+.disclaimer-card{
+    transition:all .4s ease;
+}
+
+.disclaimer-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 60px rgba(0,0,0,.12);
+}
+</style>
+
+<section class="py-20 min-h-screen bg-gradient-to-br from-gray-50 to-cyan-50">
+
+    <div class="max-w-5xl mx-auto px-4">
+
+        <div class="bg-gradient-to-r from-cyan-500 to-primary-600 rounded-[2rem] text-white p-14 text-center mb-12">
+            <h1 class="text-5xl font-extrabold mb-4">Disclaimer</h1>
+            <p class="text-xl opacity-90">
+                Important legal and informational notice
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[2rem] shadow-2xl p-10 disclaimer-card">
+
+            <div class="space-y-10">
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">General Disclaimer</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        All information provided by LinkoraX is for informational and educational purposes only.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Earnings Disclaimer</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        Earnings depend on individual effort and are not guaranteed.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">No Financial Advice</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        Our content should not be treated as financial or legal advice.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">No Investment Scheme</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        LinkoraX is a community platform and not an investment program.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Affiliate Disclaimer</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        Some external links may be affiliate links that generate commissions.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'dashboard/base.html' %}
+
+{% block dashboard_content %}
+<div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Profile</h1>
+    <p class="text-gray-600">Manage your account settings</p>
+</div>
+
+<!-- Profile Card -->
+<div class="bg-white rounded-xl shadow-md p-8 mb-8">
+    <div class="flex items-center space-x-6 mb-8">
+        <div class="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center">
+            {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="{{ user.email }}" class="w-24 h-24 rounded-full object-cover">
+            {% else %}
+            <span class="text-3xl font-bold text-primary-600">{{ user.email|first|upper }}</span>
+            {% endif %}
+        </div>
+        <div>
+            <h2 class="text-2xl font-bold text-gray-900">{{ user.profile.full_name|default:user.email }}</h2>
+            <p class="text-gray-600">{{ user.email }}</p>
+            <div class="flex items-center space-x-2 mt-2">
+                <span class="px-3 py-1 {% if user.email_verified %}bg-green-100 text-green-700{% else %}bg-yellow-100 text-yellow-700{% endif %} rounded-full text-xs font-medium">
+                    {% if user.email_verified %}Email Verified{% else %}Email Not Verified{% endif %}
+                </span>
+                <span class="px-3 py-1 {% if user.account_status == 'active' %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %} rounded-full text-xs font-medium">
+                    {{ user.account_status|title }}
+                </span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+            <p class="text-sm text-gray-500">Referral Code</p>
+            <p class="text-lg font-bold text-gray-900">{{ user.referral_code }}</p>
+        </div>
+        <div>
+            <p class="text-sm text-gray-500">Member Since</p>
+            <p class="text-lg font-bold text-gray-900">{{ user.created_at|date:"M d, Y" }}</p>
+        </div>
+        <div>
+            <p class="text-sm text-gray-500">Phone</p>
+            <p class="text-lg font-bold text-gray-900">{{ user.phone|default:'Not provided' }}</p>
+        </div>
+        <div>
+            <p class="text-sm text-gray-500">Country</p>
+            <p class="text-lg font-bold text-gray-900">{{ user.profile.country|default:'Not provided' }}</p>
+        </div>
+    </div>
+    
+    <div class="mt-8">
+        <a href="/profile/edit/" class="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+            Edit Profile
+        </a>
+    </div>
+</div>
+
+<!-- Account Status -->
+<div class="bg-white rounded-xl shadow-md p-6">
+    <h2 class="text-xl font-bold text-gray-900 mb-4">Account Status</h2>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 {% if user.email_verified %}bg-green-100{% else %}bg-yellow-100{% endif %} rounded-full flex items-center justify-center">
+                    <svg class="w-5 h-5 {% if user.email_verified %}text-green-600{% else %}text-yellow-600{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {% if user.email_verified %}
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        {% else %}
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        {% endif %}
+                    </svg>
+                </div>
+                <div>
+                    <p class="font-medium text-gray-900">Email Verification</p>
+                    <p class="text-sm text-gray-600">{% if user.email_verified %}Verified{% else %}Not verified{% endif %}</p>
+                </div>
+            </div>
+            {% if not user.email_verified %}
+            <a href="/resend-verification/" class="text-primary-600 hover:underline text-sm">Resend</a>
+            {% endif %}
+        </div>
+        
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 {% if user.phone_verified %}bg-green-100{% else %}bg-gray-200{% endif %} rounded-full flex items-center justify-center">
+                    <svg class="w-5 h-5 {% if user.phone_verified %}text-green-600{% else %}text-gray-400{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {% if user.phone_verified %}
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        {% else %}
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        {% endif %}
+                    </svg>
+                </div>
+                <div>
+                    <p class="font-medium text-gray-900">Phone Verification</p>
+                    <p class="text-sm text-gray-600">{% if user.phone_verified %}Verified{% else %}Optional{% endif %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

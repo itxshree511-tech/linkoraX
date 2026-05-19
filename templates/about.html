@@ -1,0 +1,441 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - LinkoraX{% endblock %}
+
+{% block content %}
+
+<style>
+    html{
+        scroll-behavior:smooth;
+    }
+
+    /* Hero Gradient */
+    .hero-gradient{
+        background: linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#06b6d4 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-gradient::before{
+        content:'';
+        position:absolute;
+        width:500px;
+        height:500px;
+        background:rgba(255,255,255,0.08);
+        border-radius:50%;
+        top:-200px;
+        right:-150px;
+        filter: blur(60px);
+    }
+
+    .hero-gradient::after{
+        content:'';
+        position:absolute;
+        width:400px;
+        height:400px;
+        background:rgba(255,255,255,0.05);
+        border-radius:50%;
+        bottom:-180px;
+        left:-120px;
+        filter: blur(60px);
+    }
+
+    /* Fade Animation */
+    .fade-up{
+        animation: fadeUp 1s ease forwards;
+    }
+
+    @keyframes fadeUp{
+        from{
+            opacity:0;
+            transform:translateY(40px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+
+    /* Floating */
+    .float{
+        animation: float 5s ease-in-out infinite;
+    }
+
+    @keyframes float{
+        0%{
+            transform:translateY(0px);
+        }
+        50%{
+            transform:translateY(-12px);
+        }
+        100%{
+            transform:translateY(0px);
+        }
+    }
+
+    /* Professional Card */
+    .pro-card{
+        position:relative;
+        overflow:hidden;
+        transition:all .45s ease;
+        border:1px solid rgba(0,0,0,0.05);
+    }
+
+    .pro-card::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:-120%;
+        width:100%;
+        height:100%;
+        background:linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,0.5),
+            transparent
+        );
+        transition:.8s;
+    }
+
+    .pro-card:hover::before{
+        left:120%;
+    }
+
+    .pro-card:hover{
+        transform:translateY(-12px);
+        box-shadow:0 25px 50px rgba(0,0,0,0.12);
+    }
+
+    /* Icon Animation */
+    .icon-box{
+        transition:all .5s ease;
+    }
+
+    .pro-card:hover .icon-box{
+        transform:rotateY(180deg) scale(1.1);
+    }
+
+    /* Buttons */
+    .pro-btn{
+        position:relative;
+        overflow:hidden;
+        transition:all .4s ease;
+    }
+
+    .pro-btn::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:-100%;
+        width:100%;
+        height:100%;
+        background:linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.4),
+            transparent
+        );
+        transition:.6s;
+    }
+
+    .pro-btn:hover::before{
+        left:100%;
+    }
+
+    .pro-btn:hover{
+        transform:translateY(-4px);
+        box-shadow:0 15px 35px rgba(255,255,255,0.2);
+    }
+
+    /* Glass */
+    .glass{
+        background:rgba(255,255,255,0.12);
+        backdrop-filter:blur(14px);
+        border:1px solid rgba(255,255,255,0.15);
+    }
+
+    /* Values */
+    .value-card{
+        transition:all .4s ease;
+    }
+
+    .value-card:hover{
+        transform:translateY(-12px);
+    }
+
+    .value-card:hover .icon-box{
+        transform:scale(1.15) rotate(10deg);
+    }
+
+</style>
+
+<!-- HERO -->
+<section class="hero-gradient text-white py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center fade-up">
+
+            <!-- Logo -->
+            <div class="flex justify-center mb-8">
+                <img src="/static/images/linkoraX logo.png"
+                     alt="LinkoraX Logo"
+                     class="w-44 md:w-56 float drop-shadow-2xl">
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                About <span class="text-cyan-300">LinkoraX</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto leading-relaxed">
+                Empowering individuals with digital skills and community-driven growth opportunities
+            </p>
+
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24">
+
+            <!-- Left -->
+            <div class="fade-up">
+
+                <div class="inline-block px-5 py-2 bg-primary-100 text-primary-700 rounded-full font-semibold mb-6">
+                    🚀 Our Mission
+                </div>
+
+                <h2 class="text-4xl font-bold text-gray-900 mb-6 leading-tight">
+                    Building A Smarter Digital Community
+                </h2>
+
+                <p class="text-gray-600 mb-5 text-lg leading-relaxed">
+                    LinkoraX is a premium community membership platform designed to help individuals develop digital skills, access valuable resources, and grow through collaboration.
+                </p>
+
+                <p class="text-gray-600 mb-5 text-lg leading-relaxed">
+                    We believe in the power of community and shared knowledge. Our platform provides members with access to premium learning materials, AI tools, freelancing guides, and a supportive network.
+                </p>
+
+                <p class="text-gray-600 text-lg leading-relaxed">
+                    Through our referral-based reward system, members can earn rewards by helping others discover and join our platform.
+                </p>
+
+            </div>
+
+            <!-- Right -->
+            <div class="pro-card bg-gradient-to-br from-primary-500 via-purple-500 to-cyan-500 rounded-3xl p-10 text-white shadow-2xl">
+
+                <h3 class="text-3xl font-bold mb-8">
+                    What We Offer
+                </h3>
+
+                <ul class="space-y-5">
+
+                    <li class="flex items-center text-lg">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-4">
+                            ✓
+                        </div>
+                        Premium digital resources and guides
+                    </li>
+
+                    <li class="flex items-center text-lg">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-4">
+                            ✓
+                        </div>
+                        AI tools and automation resources
+                    </li>
+
+                    <li class="flex items-center text-lg">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-4">
+                            ✓
+                        </div>
+                        Freelancing and online earning tips
+                    </li>
+
+                    <li class="flex items-center text-lg">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-4">
+                            ✓
+                        </div>
+                        Community networking opportunities
+                    </li>
+
+                    <li class="flex items-center text-lg">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-4">
+                            ✓
+                        </div>
+                        Referral reward system
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- VALUES -->
+        <div class="text-center mb-16">
+
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                Our Core Values
+            </h2>
+
+            <p class="text-xl text-gray-600">
+                Principles that drive our community forward
+            </p>
+
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+
+           <!-- Card 1 -->
+<div class="value-card pro-card group bg-white/80 backdrop-blur-xl border border-gray-100 rounded-3xl p-10 shadow-lg text-center hover:-translate-y-3 hover:shadow-2xl transition duration-500">
+
+    <div class="icon-box w-20 h-20 bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl group-hover:scale-110 transition duration-500">
+
+        <!-- Trust SVG -->
+        <svg class="w-10 h-10 text-white"
+             fill="none"
+             stroke="currentColor"
+             viewBox="0 0 24 24">
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z">
+            </path>
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  d="M9 12l2 2 4-4">
+            </path>
+
+        </svg>
+
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">
+        Trust & Transparency
+    </h3>
+
+    <p class="text-gray-600 leading-relaxed">
+        We operate with complete transparency and build trust through honest communication and fair practices.
+    </p>
+
+</div>
+
+<!-- Card 2 -->
+<div class="value-card pro-card group bg-white/80 backdrop-blur-xl border border-gray-100 rounded-3xl p-10 shadow-lg text-center hover:-translate-y-3 hover:shadow-2xl transition duration-500">
+
+    <div class="icon-box w-20 h-20 bg-gradient-to-br from-purple-600 to-indigo-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl group-hover:scale-110 transition duration-500">
+
+        <!-- Learning SVG -->
+        <svg class="w-10 h-10 text-white"
+             fill="none"
+             stroke="currentColor"
+             viewBox="0 0 24 24">
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  d="M12 6.253v13m0-13
+                     C10.832 5.477 9.246 5 7.5 5
+                     S4.168 5.477 3 6.253v13
+                     C4.168 18.477 5.754 18 7.5 18
+                     s3.332.477 4.5 1.253m0-13
+                     C13.168 5.477 14.754 5 16.5 5
+                     c1.747 0 3.332.477 4.5 1.253v13
+                     C19.832 18.477 18.247 18 16.5 18
+                     c-1.746 0-3.332.477-4.5 1.253">
+            </path>
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  d="M9 10h1m4 0h1m-6 3h6">
+            </path>
+
+        </svg>
+
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">
+        Continuous Learning
+    </h3>
+
+    <p class="text-gray-600 leading-relaxed">
+        We believe in lifelong learning and provide valuable resources to help members grow continuously.
+    </p>
+
+</div>
+
+<!-- Card 3 -->
+<div class="value-card pro-card group bg-white/80 backdrop-blur-xl border border-gray-100 rounded-3xl p-10 shadow-lg text-center hover:-translate-y-3 hover:shadow-2xl transition duration-500">
+
+    <div class="icon-box w-20 h-20 bg-gradient-to-br from-pink-500 to-orange-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl group-hover:scale-110 transition duration-500">
+
+        <!-- Community SVG -->
+        <svg class="w-10 h-10 text-white"
+             fill="none"
+             stroke="currentColor"
+             viewBox="0 0 24 24">
+
+            <circle cx="12" cy="8" r="3" stroke-width="1.8"></circle>
+            <circle cx="5" cy="10" r="2" stroke-width="1.8"></circle>
+            <circle cx="19" cy="10" r="2" stroke-width="1.8"></circle>
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857
+                     M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857
+                     M7 20H2v-2a3 3 0 015.356-1.857
+                     M7 20v-2c0-.656.126-1.283.356-1.857
+                     m0 0a5.002 5.002 0 019.288 0">
+            </path>
+
+        </svg>
+
+    </div>
+
+    <h3 class="text-2xl font-bold text-gray-900 mb-4">
+        Community Growth
+    </h3>
+
+    <p class="text-gray-600 leading-relaxed">
+        We foster a supportive environment where members help each other succeed and grow together.
+    </p>
+
+</div>
+
+        </div>
+
+        <!-- CTA -->
+        <div class="hero-gradient rounded-[2rem] p-14 text-white text-center relative overflow-hidden shadow-2xl">
+
+            <div class="relative z-10">
+
+                <h2 class="text-4xl font-bold mb-5">
+                    Join Our Community Today
+                </h2>
+
+                <p class="text-xl mb-10 opacity-90 max-w-2xl mx-auto">
+                    Start your journey with LinkoraX and unlock your true digital potential
+                </p>
+
+                <a href="/register/"
+                   class="pro-btn bg-white text-primary-600 px-10 py-4 rounded-2xl font-bold text-lg inline-block">
+                    Get Started
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+
+{% block title %}Terms & Conditions - LinkoraX{% endblock %}
+
+{% block content %}
+
+<style>
+    .glass-card{
+        background: rgba(255,255,255,0.75);
+        backdrop-filter: blur(14px);
+        border:1px solid rgba(255,255,255,0.4);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    .hero-bg{
+        background:
+        radial-gradient(circle at top left,#7c3aed22,transparent 30%),
+        radial-gradient(circle at bottom right,#06b6d422,transparent 30%),
+        linear-gradient(to bottom right,#f8fafc,#eef2ff,#f5f3ff);
+    }
+
+    .animate-fade{
+        animation: fadeUp .8s ease forwards;
+        opacity:0;
+    }
+
+    .animate-fade-delay{
+        animation: fadeUp 1s ease forwards;
+        animation-delay:.2s;
+        opacity:0;
+    }
+
+    .term-card{
+        transition: all .35s ease;
+        border:1px solid #e5e7eb;
+    }
+
+    .term-card:hover{
+        transform: translateY(-8px);
+        box-shadow:0 20px 40px rgba(124,58,237,.12);
+        border-color:#8b5cf6;
+    }
+
+    .gradient-icon{
+        background: linear-gradient(to bottom right,#7c3aed,#06b6d4);
+    }
+
+    @keyframes fadeUp{
+        from{
+            opacity:0;
+            transform:translateY(40px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+</style>
+
+<section class="relative py-20 overflow-hidden hero-bg">
+
+    <!-- Background Blur -->
+    <div class="absolute top-0 left-0 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-72 h-72 bg-cyan-400/20 rounded-full blur-3xl"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <!-- Header -->
+        <div class="text-center mb-16 animate-fade">
+
+            <div class="flex justify-center mb-6">
+                <div class="bg-white shadow-xl rounded-3xl p-4">
+                    <img src="/static/images/linkoraX logo.png"
+                         alt="LinkoraX Logo"
+                         class="w-24 h-24 object-contain">
+                </div>
+            </div>
+
+            <h1 class="text-5xl md:text-6xl font-black text-gray-900 mb-5">
+                Terms &
+                <span class="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">
+                    Conditions
+                </span>
+            </h1>
+
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Please read these terms carefully before using LinkoraX services and community platform.
+            </p>
+
+            <div class="mt-6 inline-flex items-center bg-white/80 px-5 py-2 rounded-full shadow-md border border-gray-100">
+                <span class="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
+                <span class="text-sm font-medium text-gray-700">
+                    Last updated: January 2024
+                </span>
+            </div>
+        </div>
+
+        <!-- Terms Cards -->
+        <div class="space-y-8 animate-fade-delay">
+
+            <!-- Card -->
+            <div class="glass-card rounded-3xl p-8 term-card">
+                <div class="flex items-start gap-5">
+                    <div class="w-14 h-8 rounded-2xl gradient-icon flex items-center justify-center text-white shadow-lg">
+                        <span class="text-xl font-bold">1</span>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                            Acceptance of Terms
+                        </h2>
+
+                        <p class="text-gray-600 leading-relaxed">
+                            By accessing and using LinkoraX, you agree to comply with all terms and policies mentioned on this platform. If you do not agree with these conditions, please discontinue use of the service immediately.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="glass-card rounded-3xl p-8 term-card">
+                <div class="flex items-start gap-5">
+                    <div class="w-14 h-8 rounded-2xl gradient-icon flex items-center justify-center text-white shadow-lg">
+                        <span class="text-xl font-bold">2</span>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                            Membership Access
+                        </h2>
+
+                        <p class="text-gray-600 leading-relaxed">
+                            Certain features require registration and membership payment. Users are responsible for maintaining account security and confidentiality. Unauthorized account usage may lead to suspension.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="glass-card rounded-3xl p-8 term-card">
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-8 rounded-2xl gradient-icon flex items-center justify-center text-white shadow-lg">
+                        <span class="text-xl font-bold">3</span>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                            Referral Reward System
+                        </h2>
+
+                        <p class="text-gray-600 leading-relaxed">
+                            Members may earn rewards through valid referrals. Fraudulent activity, fake accounts, or self-referrals are strictly prohibited and may result in permanent account termination.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="glass-card rounded-3xl p-8 term-card">
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-8 rounded-2xl gradient-icon flex items-center justify-center text-white shadow-lg">
+                        <span class="text-xl font-bold">4</span>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                            Withdrawals
+                        </h2>
+
+                        <p class="text-gray-600 leading-relaxed">
+                            Withdrawal requests are reviewed manually to maintain platform security. Processing time may vary depending on payment methods and verification requirements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="glass-card rounded-3xl p-8 term-card">
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-8 rounded-2xl gradient-icon flex items-center justify-center text-white shadow-lg">
+                        <span class="text-xl font-bold">5</span>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                            Acceptable Use
+                        </h2>
+
+                        <p class="text-gray-600 leading-relaxed">
+                            Users must not engage in illegal activity, spam, harassment, abuse, or attempts to damage the platform. Violations can lead to immediate suspension without prior notice.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="glass-card rounded-3xl p-8 term-card">
+                <div class="flex items-start gap-5">
+                    <div class="w-11 h-8 rounded-2xl gradient-icon flex items-center justify-center text-white shadow-lg">
+                        <span class="text-xl font-bold">6</span>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                            Intellectual Property
+                        </h2>
+
+                        <p class="text-gray-600 leading-relaxed">
+                            All platform resources, branding, graphics, and content belong to LinkoraX unless stated otherwise. Reproduction or redistribution without permission is prohibited.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="glass-card rounded-3xl p-8 term-card">
+                <div class="flex items-start gap-5">
+                    <div class="w-10 h-8 rounded-2xl gradient-icon flex items-center justify-center text-white shadow-lg">
+                        <span class="text-xl font-bold">7</span>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                            Limitation of Liability
+                        </h2>
+
+                        <p class="text-gray-600 leading-relaxed">
+                            LinkoraX is not liable for indirect losses, delays, technical interruptions, or third-party issues. Users agree to use the platform at their own discretion.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="glass-card rounded-3xl p-8 term-card">
+                <div class="flex items-start gap-5">
+                    <div class="w-10 h-8 rounded-2xl gradient-icon flex items-center justify-center text-white shadow-lg">
+                        <span class="text-xl font-bold">8</span>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                            Account Termination
+                        </h2>
+
+                        <p class="text-gray-600 leading-relaxed">
+                            We reserve the right to suspend or terminate accounts violating our policies or creating risks for the community and platform ecosystem.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="glass-card rounded-3xl p-8 term-card">
+                <div class="flex items-start gap-5">
+                    <div class="w-10 h-8 rounded-2xl gradient-icon flex items-center justify-center text-white shadow-lg">
+                        <span class="text-xl font-bold">9</span>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                            Policy Updates
+                        </h2>
+
+                        <p class="text-gray-600 leading-relaxed">
+                            Terms and policies may be updated periodically. Continued use of the platform after changes means acceptance of the updated terms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="glass-card rounded-3xl p-10 text-center term-card">
+                <div class="w-20 h-20 mx-auto rounded-full gradient-icon flex items-center justify-center shadow-2xl mb-6">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8m-18 8h18V8H3v8z">
+                        </path>
+                    </svg>
+                </div>
+
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                    Need Help?
+                </h2>
+
+                <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                    If you have any questions regarding these Terms & Conditions, feel free to contact our support team anytime.
+                </p>
+
+                <a href="/contact/"
+                   class="inline-flex items-center bg-gradient-to-r from-purple-600 to-cyan-500 text-white px-8 py-4 rounded-2xl font-semibold shadow-xl hover:scale-105 transition duration-300">
+                    Contact Support
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

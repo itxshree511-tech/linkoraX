@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block title %}Privacy Policy - LinkoraX{% endblock %}
+
+{% block content %}
+
+<style>
+    .policy-hero{
+        background: linear-gradient(135deg,#4f46e5,#7c3aed,#06b6d4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .policy-hero::before{
+        content:'';
+        position:absolute;
+        width:400px;
+        height:400px;
+        background:rgba(255,255,255,0.08);
+        border-radius:50%;
+        top:-180px;
+        right:-120px;
+        filter:blur(50px);
+    }
+
+    .glass-card{
+        background:rgba(255,255,255,0.95);
+        backdrop-filter:blur(15px);
+    }
+
+    .policy-card{
+        transition:all .4s ease;
+        position:relative;
+        overflow:hidden;
+    }
+
+    .policy-card:hover{
+        transform:translateY(-8px);
+        box-shadow:0 25px 50px rgba(79,70,229,.12);
+    }
+
+    .policy-card::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:-100%;
+        width:100%;
+        height:100%;
+        background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
+        transition:.7s;
+    }
+
+    .policy-card:hover::before{
+        left:100%;
+    }
+
+    .fade-up{
+        animation:fadeUp 1s ease forwards;
+    }
+
+    @keyframes fadeUp{
+        from{
+            opacity:0;
+            transform:translateY(40px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+</style>
+
+<section class="py-20 bg-gray-50 min-h-screen">
+
+
+    <div class="policy-hero rounded-[2rem] mx-4 mb-12 py-20 text-white text-center fade-up">
+<div class="flex justify-center mb-8">
+                <img src="/static/images/linkoraX logo.png"
+                     alt="LinkoraX Logo"
+                     class="w-44 md:w-56 float drop-shadow-2xl">
+            </div>
+        <h1 class="text-5xl font-extrabold mb-4">Privacy Policy</h1>
+        <p class="text-xl opacity-90">Your privacy and data security matter to us</p>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="glass-card rounded-[2rem] shadow-2xl p-10 policy-card fade-up">
+
+            <p class="text-gray-500 mb-8 text-lg">
+                Last updated: January 2024
+            </p>
+
+            <div class="space-y-10">
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Information We Collect</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        We collect information you provide directly to us, including account details, payment information, and communication data.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">2. How We Use Your Information</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        We use your information to improve services, process transactions, provide support, and enhance user experience.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">3. Information Sharing</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        We never sell your personal data and only share information when legally required or necessary for service delivery.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Data Security</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        We implement strong security measures to protect your data from unauthorized access or misuse.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">5. Your Rights</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        You may request access, updates, or deletion of your data anytime by contacting our support team.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Cookies</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Cookies help us improve website functionality and personalize your experience.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Changes to This Policy</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        We may update this policy occasionally. Changes will be reflected on this page.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

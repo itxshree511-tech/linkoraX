@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog - LinkoraX{% endblock %}
+
+{% block content %}
+
+<style>
+    html{
+        scroll-behavior:smooth;
+    }
+
+    /* Hero */
+    .blog-hero{
+        background: linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#06b6d4 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .blog-hero::before{
+        content:'';
+        position:absolute;
+        width:500px;
+        height:500px;
+        background:rgba(255,255,255,.08);
+        border-radius:50%;
+        top:-220px;
+        right:-150px;
+        filter:blur(60px);
+    }
+
+    .blog-hero::after{
+        content:'';
+        position:absolute;
+        width:400px;
+        height:400px;
+        background:rgba(255,255,255,.05);
+        border-radius:50%;
+        bottom:-200px;
+        left:-120px;
+        filter:blur(60px);
+    }
+
+    /* Fade */
+    .fade-up{
+        animation:fadeUp 1s ease forwards;
+    }
+
+    @keyframes fadeUp{
+        from{
+            opacity:0;
+            transform:translateY(40px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+
+    /* Floating */
+    .float{
+        animation:float 5s ease-in-out infinite;
+    }
+
+    @keyframes float{
+        0%{
+            transform:translateY(0);
+        }
+        50%{
+            transform:translateY(-12px);
+        }
+        100%{
+            transform:translateY(0);
+        }
+    }
+
+    /* Categories */
+    .cat-btn{
+        transition:all .35s ease;
+    }
+
+    .cat-btn:hover{
+        transform:translateY(-3px);
+        box-shadow:0 10px 25px rgba(79,70,229,.15);
+    }
+
+    /* Blog Cards */
+    .blog-card{
+        position:relative;
+        overflow:hidden;
+        transition:all .45s ease;
+    }
+
+    .blog-card:hover{
+        transform:translateY(-12px);
+        box-shadow:0 25px 50px rgba(0,0,0,.12);
+    }
+
+    .blog-card img{
+        transition:transform .6s ease;
+    }
+
+    .blog-card:hover img{
+        transform:scale(1.08);
+    }
+
+    .blog-card::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:-120%;
+        width:100%;
+        height:100%;
+        background:linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,.3),
+            transparent
+        );
+        transition:.8s;
+        z-index:2;
+    }
+
+    .blog-card:hover::before{
+        left:120%;
+    }
+
+    /* Read More */
+    .read-more{
+        transition:all .3s ease;
+    }
+
+    .blog-card:hover .read-more{
+        transform:translateX(5px);
+    }
+
+    /* Featured badge */
+    .featured{
+        animation:pulse 2s infinite;
+    }
+
+    @keyframes pulse{
+        0%{
+            box-shadow:0 0 0 0 rgba(251,191,36,.5);
+        }
+        70%{
+            box-shadow:0 0 0 12px rgba(251,191,36,0);
+        }
+        100%{
+            box-shadow:0 0 0 0 rgba(251,191,36,0);
+        }
+    }
+
+</style>
+
+<!-- HERO -->
+<section class="blog-hero text-white py-24">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center fade-up">
+
+            <!-- Logo -->
+            <div class="flex justify-center mb-8">
+                <img src="/static/images/linkoraX logo.png"
+                     alt="LinkoraX"
+                     class="w-44 md:w-56 float drop-shadow-2xl">
+            </div>
+
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-6">
+                LinkoraX Blog
+            </h1>
+
+            <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto leading-relaxed">
+                Tips, strategies, freelancing guides, AI tools, and digital success stories
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- BLOG -->
+<section class="py-24 bg-gray-50">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Categories -->
+        <div class="flex flex-wrap justify-center gap-4 mb-16 fade-up">
+
+            <a href="/blog/"
+               class="cat-btn px-5 py-3 rounded-2xl text-sm font-semibold {% if not request.GET.category %}bg-primary-600 text-white shadow-lg{% else %}bg-white text-gray-700 hover:bg-gray-100{% endif %}">
+                All Posts
+            </a>
+
+            {% for category in categories %}
+            <a href="/blog/?category={{ category.slug }}"
+               class="cat-btn px-5 py-3 rounded-2xl text-sm font-semibold {% if request.GET.category == category.slug %}bg-primary-600 text-white shadow-lg{% else %}bg-white text-gray-700 hover:bg-gray-100{% endif %}">
+                {{ category.name }}
+            </a>
+            {% endfor %}
+
+        </div>
+
+        <!-- Featured Top Blog -->
+        <div class="mb-20 fade-up">
+
+            <div class="bg-white rounded-[2rem] overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-2">
+
+                <div class="relative overflow-hidden">
+
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+                         class="w-full h-full object-cover hover:scale-110 transition duration-700">
+
+                    <div class="absolute top-6 left-6">
+                        <span class="featured bg-yellow-400 text-black px-4 py-2 rounded-full text-sm font-bold">
+                            Featured Article
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="p-10 lg:p-14 flex flex-col justify-center">
+
+                    <span class="text-primary-600 font-semibold mb-4">
+                        Freelancing • AI Tools
+                    </span>
+
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-6 leading-tight">
+                        How Students Are Making Money Online With AI & Freelancing
+                    </h2>
+
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                        Discover practical ways students are using ChatGPT, Canva, Fiverr, and digital skills to build online income streams in 2026.
+                    </p>
+
+                    <a href="#"
+                       class="inline-flex items-center text-primary-600 font-bold text-lg read-more">
+                        Read Full Article →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            {% for post in posts %}
+
+            <article class="blog-card bg-white rounded-[2rem] overflow-hidden shadow-lg">
+
+                <!-- Thumbnail -->
+                <div class="relative overflow-hidden">
+
+                    {% if post.thumbnail %}
+
+                    <img src="{{ post.thumbnail.url }}"
+                         alt="{{ post.title }}"
+                         class="w-full h-56 object-cover">
+
+                    {% else %}
+
+                    <!-- REAL LOOKING BLOG IMAGE -->
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+                         alt="{{ post.title }}"
+                         class="w-full h-56 object-cover">
+
+                    {% endif %}
+
+                    <!-- Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+                    <!-- Category -->
+                    <div class="absolute top-5 left-5 flex gap-2">
+
+                        <span class="px-4 py-1.5 bg-white/90 backdrop-blur text-primary-700 rounded-full text-xs font-bold shadow">
+                            {{ post.category.name }}
+                        </span>
+
+                        {% if post.is_featured %}
+                        <span class="featured px-4 py-1.5 bg-yellow-400 text-black rounded-full text-xs font-bold shadow">
+                            Featured
+                        </span>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <!-- Content -->
+                <div class="p-7">
+
+                    <!-- Meta -->
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+
+                        <span>
+                            {{ post.published_at|date:"M d, Y" }}
+                        </span>
+
+                        <span>
+                            👁 {{ post.view_count }} views
+                        </span>
+
+                    </div>
+
+                    <!-- Title -->
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4 leading-snug">
+
+                        <a href="/blog/{{ post.slug }}/"
+                           class="hover:text-primary-600 transition">
+
+                            {{ post.title }}
+
+                        </a>
+
+                    </h2>
+
+                    <!-- Excerpt -->
+                    <p class="text-gray-600 leading-relaxed mb-6 line-clamp-3">
+
+                        {{ post.excerpt|default:post.content|truncatewords:24 }}
+
+                    </p>
+
+                    <!-- Read More -->
+                    <a href="/blog/{{ post.slug }}/"
+                       class="read-more inline-flex items-center text-primary-600 font-bold">
+
+                        Read More →
+
+                    </a>
+
+                </div>
+
+            </article>
+
+            {% empty %}
+
+            <!-- EMPTY -->
+            <div class="col-span-full text-center py-24">
+
+                <div class="bg-white rounded-[2rem] shadow-xl p-16 max-w-2xl mx-auto">
+
+                    <div class="text-7xl mb-6">
+                        📝
+                    </div>
+
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">
+                        No Blog Posts Yet
+                    </h3>
+
+                    <p class="text-gray-600 text-lg">
+                        New guides, tutorials, and digital success stories are coming soon.
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'dashboard/base.html' %}
+
+{% block dashboard_content %}
+<div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Support</h1>
+    <p class="text-gray-600">Get help with your account</p>
+</div>
+
+<!-- Create Ticket Button -->
+<div class="bg-white rounded-xl shadow-md p-6 mb-8">
+    <div class="flex items-center justify-between">
+        <div>
+            <h3 class="text-lg font-bold text-gray-900">Need Help?</h3>
+            <p class="text-gray-600 text-sm">Create a support ticket and we'll get back to you</p>
+        </div>
+        <a href="/support/create/" class="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+            Create Ticket
+        </a>
+    </div>
+</div>
+
+<!-- Support Tickets -->
+<div class="bg-white rounded-xl shadow-md p-6">
+    <h2 class="text-xl font-bold text-gray-900 mb-4">Your Tickets</h2>
+    <div class="space-y-4">
+        {% for ticket in tickets %}
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer" onclick="window.location.href='/support/ticket/{{ ticket.id }}/'">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 {% if ticket.status == 'open' %}bg-red-100{% elif ticket.status == 'in_progress' %}bg-yellow-100{% else %}bg-green-100{% endif %} rounded-full flex items-center justify-center">
+                    <svg class="w-5 h-5 {% if ticket.status == 'open' %}text-red-600{% elif ticket.status == 'in_progress' %}text-yellow-600{% else %}text-green-600{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <p class="font-medium text-gray-900">{{ ticket.subject }}</p>
+                    <p class="text-sm text-gray-500">{{ ticket.ticket_number }} | {{ ticket.created_at|date:"M d, Y" }}</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <span class="px-3 py-1 rounded-full text-sm font-medium
+                    {% if ticket.status == 'open' %}bg-red-100 text-red-700
+                    {% elif ticket.status == 'in_progress' %}bg-yellow-100 text-yellow-700
+                    {% elif ticket.status == 'resolved' %}bg-green-100 text-green-700
+                    {% else %}bg-gray-100 text-gray-700{% endif %}">
+                    {{ ticket.get_status_display }}
+                </span>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-gray-500 text-center py-4">No support tickets yet</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

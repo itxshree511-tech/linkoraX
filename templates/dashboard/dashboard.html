@@ -1,0 +1,146 @@
+{% extends 'dashboard/base.html' %}
+
+{% block dashboard_content %}
+<div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome, {{ user.email }}</h1>
+    <p class="text-gray-600">Here's your account overview</p>
+</div>
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white rounded-xl shadow-md p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Wallet Balance</p>
+                <p class="text-2xl font-bold text-gray-900">{{ wallet.balance }} PKR</p>
+            </div>
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-md p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Total Earnings</p>
+                <p class="text-2xl font-bold text-gray-900">{{ wallet.total_earnings }} PKR</p>
+            </div>
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-md p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Total Referrals</p>
+                <p class="text-2xl font-bold text-gray-900">{{ referral_stats.total_referrals }}</p>
+            </div>
+            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-md p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Current Level</p>
+                <p class="text-2xl font-bold text-gray-900">{{ user_level.level.name }}</p>
+            </div>
+            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Referral Link Card -->
+<div class="bg-white rounded-xl shadow-md p-6 mb-8">
+    <h2 class="text-xl font-bold text-gray-900 mb-4">Your Referral Link</h2>
+    {% if can_share_referral %}
+    <div class="flex items-center space-x-4">
+        <input id="referralLinkInput" type="text" value="{{ referral_link }}" readonly class="flex-1 px-4 py-3 border border-gray-300 rounded-lg bg-gray-50">
+        <button onclick="copyReferralLink()" class="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+            Copy Link
+        </button>
+    </div>
+    <p class="text-sm text-gray-500 mt-2">Share this link to earn referral rewards</p>
+    {% else %}
+    <div class="border border-amber-200 bg-amber-50 rounded-lg p-4">
+        <p class="text-amber-800 font-medium">Referral link locked</p>
+        <p class="text-sm text-amber-700 mt-1">Referral link use karne se pehle {{ 299 }} PKR membership payment approve hona zaroori hai.</p>
+        <a href="/payments/" class="inline-block mt-3 bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Complete Payment</a>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Level Progress -->
+<div class="bg-white rounded-xl shadow-md p-6 mb-8">
+    <h2 class="text-xl font-bold text-gray-900 mb-4">Level Progress</h2>
+    <div class="mb-4">
+        <div class="flex justify-between mb-2">
+            <span class="text-gray-600">Current: {{ user_level.level.name }}</span>
+            <span class="text-gray-600">{{ user_level.total_referrals }} / {{ next_level_min }} referrals</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-3">
+            <div class="bg-primary-600 h-3 rounded-full" style="width: {{ level_progress }}%"></div>
+        </div>
+    </div>
+    <p class="text-sm text-gray-500">Reach {{ next_level_min }} referrals to unlock {{ next_level_name }} with {{ next_level_commission }}% commission</p>
+</div>
+
+<!-- Recent Activity -->
+<div class="bg-white rounded-xl shadow-md p-6">
+    <h2 class="text-xl font-bold text-gray-900 mb-4">Recent Activity</h2>
+    <div class="space-y-4">
+        {% for transaction in recent_transactions %}
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 {% if transaction.transaction_type == 'credit' %}bg-green-100{% else %}bg-red-100{% endif %} rounded-full flex items-center justify-center">
+                    <svg class="w-5 h-5 {% if transaction.transaction_type == 'credit' %}text-green-600{% else %}text-red-600{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {% if transaction.transaction_type == 'credit' %}
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                        {% else %}
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        {% endif %}
+                    </svg>
+                </div>
+                <div>
+                    <p class="font-medium text-gray-900">{{ transaction.description }}</p>
+                    <p class="text-sm text-gray-500">{{ transaction.created_at|date:"M d, Y" }}</p>
+                </div>
+            </div>
+            <span class="font-semibold {% if transaction.transaction_type == 'credit' %}text-green-600{% else %}text-red-600{% endif %}">
+                {% if transaction.transaction_type == 'credit' %}+{% else %}-{% endif %}{{ transaction.amount }} PKR
+            </span>
+        </div>
+        {% empty %}
+        <p class="text-gray-500 text-center py-4">No recent activity</p>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function copyReferralLink() {
+    const linkInput = document.getElementById('referralLinkInput');
+    if (!linkInput) {
+        window.location.href = '/payments/';
+        return;
+    }
+    linkInput.select();
+    document.execCommand('copy');
+    alert('Referral link copied to clipboard!');
+}
+</script>
+{% endblock %}

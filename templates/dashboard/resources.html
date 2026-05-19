@@ -1,0 +1,60 @@
+{% extends 'dashboard/base.html' %}
+
+{% block dashboard_content %}
+<div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Member Resources</h1>
+    <p class="text-gray-600">Access premium learning materials and resources</p>
+</div>
+
+<!-- Categories Filter -->
+<div class="bg-white rounded-xl shadow-md p-6 mb-8">
+    <div class="flex flex-wrap gap-2">
+        <a href="/resources/" class="px-4 py-2 rounded-full text-sm font-medium {% if not request.GET.category %}bg-primary-600 text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %}">
+            All
+        </a>
+        {% for category in categories %}
+        <a href="/resources/?category={{ category.slug }}" class="px-4 py-2 rounded-full text-sm font-medium {% if request.GET.category == category.slug %}bg-primary-600 text-white{% else %}bg-gray-200 text-gray-700 hover:bg-gray-300{% endif %}">
+            {{ category.name }}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Resources Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for resource in resources %}
+    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+        {% if resource.thumbnail %}
+        <img src="{{ resource.thumbnail.url }}" alt="{{ resource.title }}" class="w-full h-48 object-cover">
+        {% else %}
+        <div class="w-full h-48 bg-gradient-to-br from-primary-500 to-purple-500 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+        </div>
+        {% endif %}
+        
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+                <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium">{{ resource.category.name }}</span>
+                {% if resource.is_premium %}
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">Premium</span>
+                {% endif %}
+            </div>
+            
+            <h3 class="text-lg font-bold text-gray-900 mb-2">{{ resource.title }}</h3>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ resource.description }}</p>
+            
+            <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-500">{{ resource.view_count }} views</span>
+                <a href="/resources/{{ resource.slug }}/" class="text-primary-600 hover:underline text-sm font-medium">View Resource</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-span-full text-center py-12">
+        <p class="text-gray-500">No resources available yet.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

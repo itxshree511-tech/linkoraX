@@ -1,0 +1,15 @@
+{% extends 'dashboard/base.html' %}
+{% block dashboard_content %}
+<h1 class="text-2xl font-bold mb-4">Withdraw History</h1>
+<div class="bg-white rounded-xl shadow p-4">
+  {% for w in withdrawals %}
+  <div class="py-3 border-b last:border-b-0 flex justify-between">
+    <span>{{ w.withdraw_method }} - {{ w.status }}</span>
+    <span>{{ w.amount }} PKR</span>
+  </div>
+  {% empty %}
+  <p class="text-gray-500">No withdrawal requests yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}
+

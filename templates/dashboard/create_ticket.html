@@ -1,0 +1,10 @@
+{% extends 'dashboard/base.html' %}
+{% block dashboard_content %}
+<h1 class="text-2xl font-bold mb-4">Create Support Ticket</h1>
+<form method="post" class="bg-white rounded-xl shadow p-6 space-y-4">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="px-5 py-2 bg-primary-600 text-white rounded">Submit Ticket</button>
+</form>
+{% endblock %}
+

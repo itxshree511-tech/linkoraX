@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Refund Policy - LinkoraX{% endblock %}
+
+{% block content %}
+
+<style>
+.refund-card{
+    transition:all .4s ease;
+}
+
+.refund-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 30px 60px rgba(124,58,237,.15);
+}
+</style>
+
+<section class="min-h-screen py-20 bg-gradient-to-br from-gray-50 to-indigo-50">
+
+    <div class="max-w-5xl mx-auto px-4">
+
+        <div class="bg-gradient-to-r from-primary-600 to-purple-600 rounded-[2rem] p-14 text-white text-center mb-12">
+            <h1 class="text-5xl font-extrabold mb-4">Refund Policy</h1>
+            <p class="text-xl opacity-90">Please read our refund terms carefully</p>
+        </div>
+
+        <div class="bg-white rounded-[2rem] shadow-2xl p-10 refund-card">
+
+            <div class="space-y-10">
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">No Refund Policy</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        All membership fees are non-refundable once platform access has been granted.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Exceptions</h2>
+                    <ul class="list-disc pl-6 text-gray-600 text-lg space-y-2">
+                        <li>Technical billing errors</li>
+                        <li>Unauthorized payments</li>
+                        <li>Legal requirements</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Refund Requests</h2>
+                    <p class="text-gray-600 text-lg">
+                        Contact support within 7 days with valid proof for review.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Processing Time</h2>
+                    <p class="text-gray-600 text-lg">
+                        Approved refunds are processed within 14 business days.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

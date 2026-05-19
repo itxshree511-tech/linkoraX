@@ -1,0 +1,15 @@
+{% extends 'dashboard/base.html' %}
+{% block dashboard_content %}
+<h1 class="text-2xl font-bold mb-4">Transactions</h1>
+<div class="bg-white rounded-xl shadow p-4">
+  {% for tx in transactions %}
+  <div class="py-3 border-b last:border-b-0 flex justify-between">
+    <span>{{ tx.description }}</span>
+    <span>{{ tx.amount }} PKR</span>
+  </div>
+  {% empty %}
+  <p class="text-gray-500">No transactions found.</p>
+  {% endfor %}
+</div>
+{% endblock %}
+

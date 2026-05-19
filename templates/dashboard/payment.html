@@ -1,0 +1,57 @@
+{% extends 'dashboard/base.html' %}
+
+{% block dashboard_content %}
+<div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Membership Payment</h1>
+    <p class="text-gray-600">Referral link unlock karne ke liye pehle membership activate karein</p>
+</div>
+
+<div class="bg-white rounded-xl shadow-md p-6 mb-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+            <p class="text-gray-500 text-sm">One-time Membership Fee</p>
+            <p class="text-3xl font-bold text-gray-900">{{ membership_fee }} PKR</p>
+            <p class="text-sm text-gray-600 mt-1">Payment admin review ke baad membership activate hoti hai.</p>
+        </div>
+        <a href="/payments/submit/" class="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition text-center">I Have Paid - Submit Details</a>
+    </div>
+</div>
+
+{% if latest_payment %}
+<div class="mb-6 rounded-lg border p-4 {% if latest_payment.status == 'approved' %}bg-green-50 border-green-200{% elif latest_payment.status == 'rejected' or latest_payment.status == 'failed' %}bg-red-50 border-red-200{% else %}bg-yellow-50 border-yellow-200{% endif %}">
+    <p class="font-semibold">Latest Payment Status: {{ latest_payment.status|title }}</p>
+    <p class="text-sm mt-1">Transaction ID: {{ latest_payment.transaction_id|default:"N/A" }}</p>
+</div>
+{% endif %}
+
+<div class="bg-white rounded-xl shadow-md p-8 mb-8">
+    <h2 class="text-xl font-bold text-gray-900 mb-4">Simple Steps</h2>
+    <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+        <li>Neeche diye gaye account par exactly <strong>{{ membership_fee }} PKR</strong> send karein.</li>
+        <li>Transaction ID ya receipt screenshot save karein.</li>
+        <li><strong>I Have Paid - Submit Details</strong> par click karke form submit karein.</li>
+        <li>Approval ke baad referral link unlock ho jayega.</li>
+    </ol>
+</div>
+
+<div class="bg-white rounded-xl shadow-md p-8 mb-8">
+    <h2 class="text-xl font-bold text-gray-900 mb-6">Payment Receiver Details</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="border rounded-xl p-5">
+            <p class="text-sm text-gray-500">JazzCash</p>
+            <p class="font-semibold text-gray-900 mt-1">{{ jazzcash_account|default:"Add in .env" }}</p>
+            <p class="text-xs text-gray-500 mt-2">Receiver: {{ payment_receiver_name }}</p>
+        </div>
+        <div class="border rounded-xl p-5">
+            <p class="text-sm text-gray-500">Easypaisa</p>
+            <p class="font-semibold text-gray-900 mt-1">{{ easypaisa_account|default:"Add in .env" }}</p>
+            <p class="text-xs text-gray-500 mt-2">Receiver: {{ payment_receiver_name }}</p>
+        </div>
+        <div class="border rounded-xl p-5">
+            <p class="text-sm text-gray-500">PayFast Merchant ID</p>
+            <p class="font-semibold text-gray-900 mt-1">{{ payfast_merchant_id|default:"Add in .env" }}</p>
+            <p class="text-xs text-gray-500 mt-2">Receiver: {{ payment_receiver_name }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

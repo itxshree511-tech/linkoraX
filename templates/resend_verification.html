@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Resend Verification - LinkoraX{% endblock %}
+
+{% block content %}
+
+<style>
+.verify-card{
+    transition:all .4s ease;
+}
+
+.verify-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 30px 60px rgba(79,70,229,.15);
+}
+
+.verify-btn{
+    transition:all .4s ease;
+}
+
+.verify-btn:hover{
+    transform:translateY(-3px);
+}
+</style>
+
+<section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-purple-100 py-16">
+
+    <div class="max-w-md w-full px-4">
+
+        <div class="bg-white rounded-[2rem] shadow-2xl p-10 verify-card">
+
+            <div class="text-center mb-10">
+
+                <div class="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    ✉️
+                </div>
+
+                <h1 class="text-4xl font-bold text-gray-900 mb-3">
+                    Resend Verification
+                </h1>
+
+                <p class="text-gray-600 text-lg">
+                    Enter your email to receive a verification link
+                </p>
+
+            </div>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="space-y-6">
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                            placeholder="Enter your email"
+                            class="w-full px-5 py-4 rounded-xl border border-gray-300 focus:ring-4 focus:ring-primary-200 focus:border-primary-500 outline-none transition">
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="verify-btn w-full bg-gradient-to-r from-primary-600 to-purple-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg">
+
+                        Resend Verification
+
+                    </button>
+
+                </div>
+
+            </form>
+
+            <div class="mt-8 text-center">
+                <a href="/login/" class="text-primary-600 font-semibold hover:underline">
+                    Back to Login
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
