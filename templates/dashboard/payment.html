@@ -25,18 +25,18 @@
 {% endif %}
 
 <div class="bg-white rounded-xl shadow-md p-8 mb-8">
-    <h2 class="text-xl font-bold text-gray-900 mb-4">Simple Steps</h2>
+    <h2 class="text-xl font-bold text-gray-900 mb-4">How It Works</h2>
     <ol class="list-decimal pl-5 space-y-2 text-gray-700">
-        <li>Neeche diye gaye account par exactly <strong>{{ membership_fee }} PKR</strong> send karein.</li>
-        <li>Transaction ID ya receipt screenshot save karein.</li>
-        <li><strong>I Have Paid - Submit Details</strong> par click karke form submit karein.</li>
-        <li>Approval ke baad referral link unlock ho jayega.</li>
+        <li>Send exactly <strong>{{ membership_fee }} PKR</strong> to your selected payment account below.</li>
+        <li>Copy the transaction/reference ID from your payment app.</li>
+        <li>Click <strong>I Have Paid - Submit Details</strong> and confirm with your transaction ID.</li>
+        <li>After verification, membership is activated automatically.</li>
     </ol>
 </div>
 
 <div class="bg-white rounded-xl shadow-md p-8 mb-8">
     <h2 class="text-xl font-bold text-gray-900 mb-6">Payment Receiver Details</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="border rounded-xl p-5">
             <p class="text-sm text-gray-500">JazzCash</p>
             <p class="font-semibold text-gray-900 mt-1">{{ jazzcash_account|default:"Add in .env" }}</p>
@@ -45,11 +45,6 @@
         <div class="border rounded-xl p-5">
             <p class="text-sm text-gray-500">Easypaisa</p>
             <p class="font-semibold text-gray-900 mt-1">{{ easypaisa_account|default:"Add in .env" }}</p>
-            <p class="text-xs text-gray-500 mt-2">Receiver: {{ payment_receiver_name }}</p>
-        </div>
-        <div class="border rounded-xl p-5">
-            <p class="text-sm text-gray-500">PayFast Merchant ID</p>
-            <p class="font-semibold text-gray-900 mt-1">{{ payfast_merchant_id|default:"Add in .env" }}</p>
             <p class="text-xs text-gray-500 mt-2">Receiver: {{ payment_receiver_name }}</p>
         </div>
     </div>

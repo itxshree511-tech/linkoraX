@@ -1,5 +1,5 @@
 import os
-import dj_database_url 
+import dj_database_url
 from pathlib import Path
 from decouple import config
 
@@ -108,14 +108,28 @@ WSGI_APPLICATION = 'linkorax.wsgi.application'
 
 
 # Database
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgresql://postgres:postgres@localhost:5432/mysite',
+#         conn_max_age=600
+#     )
+# }
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'linkorax_db',
+        'USER': 'postgres',
+        'PASSWORD': 'shery@12.',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
 
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv("DATABASE_URL")
+#     )
+# }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -147,7 +161,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
@@ -252,6 +266,8 @@ PAYFAST_MERCHANT_ID = config('PAYFAST_MERCHANT_ID', default='')
 PAYMENT_RECEIVER_NAME = config('PAYMENT_RECEIVER_NAME', default='LinkoraX')
 PRIMARY_ADMIN_EMAIL = config('PRIMARY_ADMIN_EMAIL', default='itxshree511@gmail.com').strip().lower()
 WHATSAPP_GROUP_LINK = config('WHATSAPP_GROUP_LINK', default='')
+JAZZCASH_WEBHOOK_SECRET = config('JAZZCASH_WEBHOOK_SECRET', default='')
+EASYPAISA_WEBHOOK_SECRET = config('EASYPAISA_WEBHOOK_SECRET', default='')
 
 # Referral Settings
 REFERRAL_LEVEL_1_COMMISSION = 10  # 10%

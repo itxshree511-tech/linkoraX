@@ -5,151 +5,216 @@
 {% block content %}
 
 <style>
-    html{
-        scroll-behavior:smooth;
-    }
+html{
+    scroll-behavior:smooth;
+}
 
-    /* Hero */
-    .blog-hero{
-        background: linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#06b6d4 100%);
-        position: relative;
-        overflow: hidden;
-    }
+/* Hero */
+.blog-hero{
+    background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#06b6d4 100%);
+    position:relative;
+    overflow:hidden;
+}
 
-    .blog-hero::before{
-        content:'';
-        position:absolute;
-        width:500px;
-        height:500px;
-        background:rgba(255,255,255,.08);
-        border-radius:50%;
-        top:-220px;
-        right:-150px;
-        filter:blur(60px);
-    }
+.blog-hero::before{
+    content:'';
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:rgba(255,255,255,.08);
+    border-radius:50%;
+    top:-220px;
+    right:-150px;
+    filter:blur(60px);
+}
 
-    .blog-hero::after{
-        content:'';
-        position:absolute;
-        width:400px;
-        height:400px;
-        background:rgba(255,255,255,.05);
-        border-radius:50%;
-        bottom:-200px;
-        left:-120px;
-        filter:blur(60px);
-    }
+.blog-hero::after{
+    content:'';
+    position:absolute;
+    width:400px;
+    height:400px;
+    background:rgba(255,255,255,.05);
+    border-radius:50%;
+    bottom:-200px;
+    left:-120px;
+    filter:blur(60px);
+}
 
-    /* Fade */
-    .fade-up{
-        animation:fadeUp 1s ease forwards;
-    }
+/* Smooth fade */
+.fade-up{
+    animation:fadeUp 1s ease forwards;
+}
 
-    @keyframes fadeUp{
-        from{
-            opacity:0;
-            transform:translateY(40px);
-        }
-        to{
-            opacity:1;
-            transform:translateY(0);
-        }
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(50px);
     }
-
-    /* Floating */
-    .float{
-        animation:float 5s ease-in-out infinite;
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
+}
 
-    @keyframes float{
-        0%{
-            transform:translateY(0);
-        }
-        50%{
-            transform:translateY(-12px);
-        }
-        100%{
-            transform:translateY(0);
-        }
+/* Floating logo */
+.float{
+    animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+    100%{transform:translateY(0);}
+}
+
+/* Categories */
+.cat-btn{
+    transition:all .35s ease;
+}
+
+.cat-btn:hover{
+    transform:translateY(-5px) scale(1.04);
+    box-shadow:0 12px 30px rgba(79,70,229,.18);
+}
+
+/* BLOG CARDS */
+.blog-card{
+    position:relative;
+    overflow:hidden;
+    transition:all .5s ease;
+    border:1px solid rgba(0,0,0,.05);
+    background:#fff;
+}
+
+.blog-card:hover{
+    transform:translateY(-16px);
+    box-shadow:
+    0 30px 70px rgba(0,0,0,.14),
+    0 10px 25px rgba(79,70,229,.12);
+}
+
+/* Shine effect */
+.blog-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.28),
+        transparent
+    );
+    transition:.9s;
+    z-index:2;
+}
+
+.blog-card:hover::before{
+    left:120%;
+}
+
+/* Image zoom */
+.blog-card img{
+    transition:transform .8s ease;
+}
+
+.blog-card:hover img{
+    transform:scale(1.12);
+}
+
+/* Read more animation */
+.read-more{
+    transition:all .35s ease;
+}
+
+.blog-card:hover .read-more{
+    transform:translateX(10px);
+}
+
+/* Featured badge pulse */
+.featured{
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{
+        box-shadow:0 0 0 0 rgba(251,191,36,.5);
     }
-
-    /* Categories */
-    .cat-btn{
-        transition:all .35s ease;
+    70%{
+        box-shadow:0 0 0 15px rgba(251,191,36,0);
     }
-
-    .cat-btn:hover{
-        transform:translateY(-3px);
-        box-shadow:0 10px 25px rgba(79,70,229,.15);
+    100%{
+        box-shadow:0 0 0 0 rgba(251,191,36,0);
     }
+}
 
-    /* Blog Cards */
-    .blog-card{
-        position:relative;
-        overflow:hidden;
-        transition:all .45s ease;
-    }
+/* BLOG ARTICLE SECTIONS */
+article section{
+    margin:6rem 0; /* zyada spacing */
+    padding:2.5rem;
+    border-radius:2rem;
+    background:linear-gradient(to bottom right,#fff,#f9fafb);
+    transition:all .45s ease;
+    border:1px solid rgba(0,0,0,.05);
+    overflow:hidden;
+    position:relative;
+}
 
-    .blog-card:hover{
-        transform:translateY(-12px);
-        box-shadow:0 25px 50px rgba(0,0,0,.12);
-    }
+article section:hover{
+    transform:translateY(-10px);
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.12),
+    0 8px 25px rgba(79,70,229,.08);
+}
 
-    .blog-card img{
-        transition:transform .6s ease;
-    }
+/* Shine on sections */
+article section::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.25),
+        transparent
+    );
+    transition:.9s;
+}
 
-    .blog-card:hover img{
-        transform:scale(1.08);
-    }
+article section:hover::before{
+    left:120%;
+}
 
-    .blog-card::before{
-        content:'';
-        position:absolute;
-        top:0;
-        left:-120%;
-        width:100%;
-        height:100%;
-        background:linear-gradient(
-            120deg,
-            transparent,
-            rgba(255,255,255,.3),
-            transparent
-        );
-        transition:.8s;
-        z-index:2;
-    }
+/* Heading hover */
+article section h4{
+    transition:.35s ease;
+}
 
-    .blog-card:hover::before{
-        left:120%;
-    }
+article section:hover h4{
+    transform:translateX(8px);
+    color:#4f46e5;
+}
 
-    /* Read More */
-    .read-more{
-        transition:all .3s ease;
-    }
+/* Better paragraph spacing */
+article section p{
+    line-height:2;
+}
 
-    .blog-card:hover .read-more{
-        transform:translateX(5px);
-    }
+/* Better images */
+article section img{
+    transition:.8s ease;
+    border-radius:1.8rem;
+}
 
-    /* Featured badge */
-    .featured{
-        animation:pulse 2s infinite;
-    }
-
-    @keyframes pulse{
-        0%{
-            box-shadow:0 0 0 0 rgba(251,191,36,.5);
-        }
-        70%{
-            box-shadow:0 0 0 12px rgba(251,191,36,0);
-        }
-        100%{
-            box-shadow:0 0 0 0 rgba(251,191,36,0);
-        }
-    }
-
+article section:hover img{
+    transform:scale(1.08);
+    box-shadow:0 20px 50px rgba(0,0,0,.18);
+}
 </style>
 
 <!-- HERO -->
@@ -166,7 +231,7 @@
                      class="w-44 md:w-56 float drop-shadow-2xl">
             </div>
 
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-6">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">
                 LinkoraX Blog
             </h1>
 
@@ -226,7 +291,7 @@
                         Freelancing • AI Tools
                     </span>
 
-                    <h2 class="text-4xl font-extrabold text-gray-900 mb-6 leading-tight">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6 leading-tight">
                         How Students Are Making Money Online With AI & Freelancing
                     </h2>
 
@@ -337,27 +402,215 @@
 
             </article>
 
-            {% empty %}
+                        {% empty %}
 
-            <!-- EMPTY -->
-            <div class="col-span-full text-center py-24">
+            <div class="col-span-full">
+                <article class="bg-white rounded-[2rem] shadow-2xl overflow-hidden">
+                    <header class="p-8 md:p-12 border-b border-gray-100">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full bg-primary-50 text-primary-700 text-sm font-bold">
+                            LinkoraX Special Guide
+                        </span>
+                        <h3 class="text-3xl md:text-5xl font-bold text-gray-900 mt-5 leading-tight">
+                            Student To Digital Earner: Complete LinkoraX Roadmap For 2026
+                        </h3>
+                        <p class="text-gray-600 text-lg mt-5 leading-relaxed max-w-4xl">
+                            Agar aap online earning start karna chahte hain lekin clear direction nahi mil rahi,
+                            to yeh long-form practical guide aap ko step by step batati hai ke LinkoraX ke
+                            ecosystem, AI tools, freelancing, referrals, aur consistency ke through sustainable
+                            digital income kaise build ki jati hai.
+                        </p>
+                    </header>
 
-                <div class="bg-white rounded-[2rem] shadow-xl p-16 max-w-2xl mx-auto">
+                    <div class="p-8 md:p-12 space-y-24">
+                        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">1. Mindset First: Fast Money Nahi, Smart System</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    Online earning mein sab se pehla game mindset ka hota hai. Jitni jaldi banda yeh
+                                    samajh le ke yeh sprint nahi balkay marathon hai, utni jaldi woh stable result leta hai.
+                                    LinkoraX model bhi isi principle par kaam karta hai: learning, networking, value creation,
+                                    phir consistent growth.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Is stage par goal simple rakhein: 30 din tak daily 60-90 minutes focused kaam. Skill learning,
+                                    portfolio improvement, aur platform understanding par focus karein.
+                                </p>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"
+                                 alt="Planning digital growth"
+                                 class="w-full h-80 object-cover rounded-3xl shadow-lg">
+                        </section>
 
-                    <div class="text-7xl mb-6">
-                        📝
+                        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+                                 alt="Team collaboration"
+                                 class="w-full h-80 object-cover rounded-3xl shadow-lg order-2 lg:order-1">
+                            <div class="order-1 lg:order-2">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">2. LinkoraX Model Ko Samjhein</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    LinkoraX sirf account create karne ka naam nahi hai. Yeh ek structured ecosystem hai jahan
+                                    training, referrals, guidance aur community activity mil kar user ki growth speed barha dete hain.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Jab aap platform ko system ki tarah treat karte hain, to random efforts organized process mein
+                                    convert ho jate hain: lead generation, skill showcase, collaboration aur monetization.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">3. AI Stack Build Karein (Beginner Friendly)</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    2026 mein speed ka matlab AI-assisted workflow hai. Aap basic stack se start kar sakte hain:
+                                    ChatGPT for writing ideas, Canva for designs, Notion for planning, aur CapCut for short videos.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Rule simple hai: pehle tools collect na karein, pehle use-cases define karein. Har tool ka ek
+                                    clear kaam ho aur output client ya audience ke liye measurable value create kare.
+                                </p>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935"
+                                 alt="AI workflow setup"
+                                 class="w-full h-80 object-cover rounded-3xl shadow-lg">
+                        </section>
+
+                        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f"
+                                 alt="Analytics dashboard"
+                                 class="w-full h-80 object-cover rounded-3xl shadow-lg order-2 lg:order-1">
+                            <div class="order-1 lg:order-2">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">4. Profile Optimization Se Trust Banta Hai</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    Chahe aap freelancing karein, affiliate direction mein jayein ya service-based earning, profile
+                                    hi aap ka digital CV hota hai. Strong headline, simple bio, clean DP, aur proof-based portfolio
+                                    instant trust build karta hai.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    LinkoraX users ke liye best strategy yeh hai ke profile mein niche clear ho: content, design,
+                                    social media, virtual assistant ya AI productivity support.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">5. First 3 Income Channels</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    New user ke liye teen practical channels ka combo sab se effective hota hai:
+                                    micro freelancing gigs, referral-based commissions, aur digital resource selling
+                                    (templates, prompts, content packs).
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    In channels ka faida yeh hai ke aap ek source slow ho to doosra source support de deta hai.
+                                    Result: income volatility kam, confidence zyada.
+                                </p>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f"
+                                 alt="Multiple income streams"
+                                 class="w-full h-80 object-cover rounded-3xl shadow-lg">
+                        </section>
+
+                        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216"
+                                 alt="Client communication"
+                                 class="w-full h-80 object-cover rounded-3xl shadow-lg order-2 lg:order-1">
+                            <div class="order-1 lg:order-2">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">6. Client Communication Script</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    New freelancers ka common issue yeh hota hai ke skill hoti hai lekin deal close nahi hoti.
+                                    Isliye communication templates ready rakhein: intro message, proposal format, revision terms,
+                                    aur delivery note.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Jab communication clear hoti hai to disputes kam hote hain, repeat clients barhte hain,
+                                    aur rating improve hoti hai.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">7. Referral Growth Without Spam</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    Referral system tab best kaam karta hai jab aap value-led sharing karte hain. Sirf link bhejne se
+                                    result nahi aata. Mini guide, short video explainers, aur real case studies share karein.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Is approach se trust build hota hai aur jo log join karte hain woh active rehte hain, jis se
+                                    long-term commissions ka flow improve hota hai.
+                                </p>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978"
+                                 alt="Referral strategy planning"
+                                 class="w-full h-80 object-cover rounded-3xl shadow-lg">
+                        </section>
+
+                        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b"
+                                 alt="Task management notes"
+                                 class="w-full h-80 object-cover rounded-3xl shadow-lg order-2 lg:order-1">
+                            <div class="order-1 lg:order-2">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">8. Weekly Execution Plan</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    Growth ka secret motivation nahi, scheduling hai. Weekly split kuch is tarah rakhein:
+                                    2 din skill upgrade, 2 din outreach, 1 din content, 1 din follow-up, 1 din analysis.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Agar aap har week measurable numbers track karte hain (messages sent, responses, conversions,
+                                    completed tasks), to progress predictable ban jata hai.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div>
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">9. Mistakes Jo Aksar New Users Karte Hain</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    Common mistakes mein over-promising, under-pricing, random niches try karna, aur consistency break
+                                    kar dena shamil hai. Har mistake ka solution documented process hai.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Rule yaad rakhein: pehle quality aur reliability build karein, phir scale karein. Jaldi scale karna
+                                    aksar burnout aur poor delivery ka sabab banta hai.
+                                </p>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952"
+                                 alt="Learning from mistakes"
+                                 class="w-full h-80 object-cover rounded-3xl shadow-lg">
+                        </section>
+
+                        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+                                 alt="Future digital roadmap"
+                                 class="w-full h-80 object-cover rounded-3xl shadow-lg order-2 lg:order-1">
+                            <div class="order-1 lg:order-2">
+                                <h4 class="text-2xl font-bold text-gray-900 mb-4">10. 90-Day Action Roadmap</h4>
+                                <p class="text-gray-700 leading-relaxed mb-4">
+                                    Day 1-30: foundation aur skill assets. Day 31-60: outreach aur client onboarding.
+                                    Day 61-90: optimization, referrals expansion aur recurring services.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Agar aap iss roadmap ko discipline ke saath follow karein, to aap sirf earning start nahi karte,
+                                    balkay ek durable digital career track build karte hain jo time ke saath compound hota hai.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section class="bg-gray-50 border border-gray-100 rounded-3xl p-8 md:p-10">
+                            <h4 class="text-2xl font-bold text-gray-900 mb-4">Final Takeaway</h4>
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                LinkoraX ka faida tab milta hai jab aap platform ko active learning aur execution hub ki tarah use
+                                karte hain. Sirf join karna enough nahi hota; focused actions, smart tools, aur consistent follow-up
+                                se hi visible results milte hain.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Is guide ko bookmark karein, weekly review karein, aur har month apne goals revise karein. Aaj ka
+                                disciplined action kal ki predictable growth banata hai.
+                            </p>
+                        </section>
                     </div>
-
-                    <h3 class="text-3xl font-bold text-gray-900 mb-4">
-                        No Blog Posts Yet
-                    </h3>
-
-                    <p class="text-gray-600 text-lg">
-                        New guides, tutorials, and digital success stories are coming soon.
-                    </p>
-
-                </div>
-
+                </article>
             </div>
 
             {% endfor %}
@@ -369,3 +622,4 @@
 </section>
 
 {% endblock %}
+
