@@ -27,7 +27,11 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-this-in-produc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env_bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    "mysite-production-32ab.up.railway.app",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -234,16 +238,19 @@ CELERY_TIMEZONE = TIME_ZONE
 
 # Security Settings for Production
 if not DEBUG:
-    SECURE_SSL_REDIRECT = env_bool('SECURE_SSL_REDIRECT', default=False)
+    SECURE_SSL_REDIRECT = False
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SESSION_COOKIE_SECURE = env_bool('SESSION_COOKIE_SECURE', default=True)
-    CSRF_COOKIE_SECURE = env_bool('CSRF_COOKIE_SECURE', default=True)
+
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
+
+    SECURE_HSTS_SECONDS = 0
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
 
 # Login URLs
 LOGIN_URL = '/login/'
