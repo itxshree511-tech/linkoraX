@@ -123,11 +123,12 @@ WSGI_APPLICATION = 'linkorax.wsgi.application'
 #         conn_max_age=600
 #     )
 # }
+import os
+import dj_database_url
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL', default='sqlite:///db.sqlite3'),
-        conn_max_age=600,
-        ssl_require=False
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL")
     )
 }
 
