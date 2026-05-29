@@ -26,11 +26,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-this-in-produc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env_bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = config(
-    'ALLOWED_HOSTS',
-    default='localhost,127.0.0.1,.railway.app',
-    cast=lambda x: [s.strip() for s in x.split(',')]
-)
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -238,7 +234,8 @@ CELERY_TIMEZONE = TIME_ZONE
 
 # Security Settings for Production
 if not DEBUG:
-    SECURE_SSL_REDIRECT = env_bool('SECURE_SSL_REDIRECT', default=True)
+    SECURE_SSL_REDIRECT = env_bool('SECURE_SSL_REDIRECT', default=False)
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = env_bool('SESSION_COOKIE_SECURE', default=True)
     CSRF_COOKIE_SECURE = env_bool('CSRF_COOKIE_SECURE', default=True)
     SECURE_BROWSER_XSS_FILTER = True
